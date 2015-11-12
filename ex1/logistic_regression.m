@@ -24,11 +24,11 @@ function [f,g] = logistic_regression(theta, X,y)
 %%% YOUR CODE HERE %%%
 
 for j = 1:m
-    f = f + y(j) * log(1 / (1 + exp(-theta' * X(:,j)))) + (1 - y(j)) * (log(1 - 1 / (1 + exp(-theta' * X(:,j)))));
+    f = f + y(j) * log(sigmoid(theta' * X(:,j))) + (1 - y(j)) * (log(1 - sigmoid(theta' * X(:,j))));
 end
 f = -f;
 
 for j = 1:m
-    g = g + X(:,j) * (1 / (1 + exp(-theta' * X(:,j))) - y(j));
+    g = g + X(:,j) .* (sigmoid(theta' * X(:,j)) - y(j));
 end
 
